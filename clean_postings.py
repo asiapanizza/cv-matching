@@ -1,26 +1,71 @@
 import pandas as pd
 import json
-postings = pd.read_csv("data_jobs.csv")
+
+import pandas as pd
+import os
+
+
+
+import pandas as pd
+import os
+
+import pandas as pd
+import os
+
+
 
 def schematize_posting(postings):
     diz = dict()
-    diz["title"] = postings["job_title_short"]
+    
+    # Inseriamo il tuo ID personalizzato (B1, B2...)
+    
+    diz["title"] = postings["job_title_short"] if pd.notna(postings["job_title_short"]) else ""
     diz["category"] = "job"
-    diz["location"] = str(postings["job_location"]) +", " + str(postings["job_country"])
-    diz["skills"] = set()
-    if isinstance(postings["job_skills"], list) or isinstance(postings["job_skills"], set):
-        diz["skills"] = set(postings["job_skills"].values())
-    diz["company"] = postings["company_name"]
-    if isinstance(postings["job_type_skills"], dict):
-        for el in list(postings["job_type_skills"].values()):
-            if el not in diz["skills"]:
-                diz["skills"]= diz["skills"].update(el)
-    elif isinstance(postings["job_type_skills"], list):
-        for el in postings["job_type_skills"]:
-            if el not in diz["skills"]:
-                diz["skills"]= diz["skills"].update(el)
-    diz["skills"] = list(diz["skills"])
+    diz["company"] = postings["company_name"] if pd.notna(postings["company_name"]) else ""
+    
+    # Gestione Location: evita "nan, Italy"
+    loc = str(postings["job_location"]) if pd.notna(postings["job_location"]) else ""
+    country = str(postings["job_country"]) if pd.notna(postings["job_country"]) else ""
+    
+    if loc and country:
+        diz["location"] = f"{loc}, {country}"
+    else:
+        diz["location"] = loc or country or ""
+
+    # Gestione Skills
+    skills_set = set()
+    
+    # 1. job_skills
+    js = postings.get("job_skills")
+    if pd.notna(js):
+        if isinstance(js, (list, set)):
+            skills_set.update(js)
+        elif isinstance(js, dict):
+            skills_set.update(js.values())
+        elif isinstance(js, str):
+            if js[0] == "[":
+                skill = eval(js)
+                skills_set.update(skill)
+            elif js[0] == "{":
+                skill = eval(js)
+                skills_set.update(skill.values())
+
+    # 2. job_type_skills
+    jts = postings.get("job_type_skills")
+    if pd.notna(jts):
+        if isinstance(jts, dict):
+            for el in jts.values():
+                # .update() aggiunge elementi se el è una lista, .add() se è singolo
+                if isinstance(el, list): skills_set.update(el)
+                else: skills_set.add(el)
+        elif isinstance(jts, list):
+            skills_set.update(jts)
+
+    # Convertiamo in lista e rimuoviamo eventuali NaN rimasti dentro le liste
+    diz["skills"] = [str(s) for s in skills_set if pd.notna(s)]
+    
     return diz
+
 
 def job_formatting(diz):
     text = diz["company"]
@@ -38,6 +83,7 @@ def job_formatting(diz):
 
     
 if __name__ == "__main__":
+    postings = pd.read_csv("data_jobs.csv")
     jobs = []
     for i in range(len(postings)):
         diz = schematize_posting(postings.iloc[i])
