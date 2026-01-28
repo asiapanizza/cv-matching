@@ -6,7 +6,7 @@ def schematize_posting(postings):
     diz = dict()
     diz["title"] = postings["job_title_short"]
     diz["category"] = "job"
-    diz["location"] = postings["job_location"] +", " + postings["job_country"]
+    diz["location"] = str(postings["job_location"]) +", " + str(postings["job_country"])
     diz["skills"] = set()
     if isinstance(postings["job_skills"], list) or isinstance(postings["job_skills"], set):
         diz["skills"] = set(postings["job_skills"].values())
@@ -43,6 +43,6 @@ if __name__ == "__main__":
         diz = schematize_posting(postings.iloc[i])
         jobs.append(diz)
     with open("cleaned_jobs.json", "w") as f:
-        json.dump(jobs,f)
+        json.dump(jobs,f, indent = 4)
     print(jobs[0])
 
