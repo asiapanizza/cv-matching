@@ -1,0 +1,35 @@
+CURRICULUM VITAE: Marco Valeri
+Location: Milan, Italy | Email: marco.valeri.dev@email.com | Phone: +39 02 123 4567
+
+--- PROFESSIONAL SUMMARY ---
+Results-oriented Senior Software Engineer with over 8 years of experience in 
+full-stack development. Expert in Python, Cloud Architecture, and Agile 
+methodologies. Proven track record of leading teams to deliver scalable 
+web applications.
+
+--- WORK EXPERIENCE ---
+Senior Developer | TechSolutions S.p.A. | 2020 – Present
+- Led a team of 5 developers in migrating a monolithic architecture to microservices.
+- Optimized database queries, reducing latency by 40%.
+- Implemented CI/CD pipelines using Jenkins and Docker.
+
+Full Stack Developer | Startup Hub | 2016 – 2020
+- Developed responsive front-end components using React.js.
+- Designed RESTful APIs using Flask and PostgreSQL.
+- Collaborated with UX designers to improve user retention by 15%.
+
+--- EDUCATION ---
+Master of Science in Computer Science
+Polytechnic University of Milan | 2014 – 2016
+
+Bachelor of Engineering in Information Technology
+University of Rome Tor Vergata | 2011 – 2014
+
+--- TECHNICAL SKILLS ---
+- Languages: Python, JavaScript, SQL, C++
+- Frameworks: Django, FastAPI, React, Node.js
+- Tools: Git, AWS, Kubernetes, Terraform
+- Languages: Italian (Native), English (C1 - Professional)
+
+--- INTERESTS ---
+Open-source contributing, Marathon running, and Chess.

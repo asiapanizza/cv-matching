@@ -1,0 +1,36 @@
+name: cv_processing_conda_environment
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - ipykernel
+  - pandas
+  - numpy
+  - scikit-learn
+  - scipy
+  - matplotlib
+  - tqdm
+  - pillow
+  - pyyaml
+  - python-dotenv
+  - pip:
+      - confluent-kafka
+      - torch
+      - pyspark==3.5.0
+      - transformers
+      - datasets
+      - sentence-transformers
+      - gliner
+      - spacy
+      - faiss-cpu
+      - pydantic
+      - huggingface-hub
+      - onnxruntime
+      - pyarrow
+      - polars
+      - pdfplumber
+      - pymupdf
+      - seaborn
+      - matplotlib
